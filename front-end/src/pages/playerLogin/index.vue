@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>玩家登录</h1>
+    <header>狼人杀</header>
   </div>
 </template>
 
