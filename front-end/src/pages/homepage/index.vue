@@ -1,8 +1,6 @@
 <template>
-  <div class="hello">
-    <header>狼人杀</header>
-    <mt-button class="god-button" @click="jumpToGod">我是上帝</mt-button>
-    <mt-button class="player-button" @click="jumpToPlayer">我是玩家</mt-button>
+
+
   </div>
 </template>
 
