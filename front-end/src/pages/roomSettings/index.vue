@@ -115,9 +115,12 @@ export default {
 p {
   margin: 0.8rem;
 }
-.hello {
-  width: 100%;
-  /* font-size: 1rem; */
+
+h1 {
+  margin: 2rem;
+}
+.hello>p {
+  color: #ffffff;
 }
 .roleBorder {
   width: 25%;
@@ -150,5 +153,4 @@ p {
   height: 3rem;
   line-height: 3rem;
 }
-
 </style>
