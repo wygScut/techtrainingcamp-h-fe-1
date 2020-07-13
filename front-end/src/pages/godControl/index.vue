@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1>狼人杀</h1>
-    <strong>房间号:{{Room}}</strong>
-
+    <p>房间号:{{Room}}</p>
+      
     <div class="biankuang">
       <table border="0" cellspacing="1" cellpadding="0" class="table">
          <caption><strong>玩家状态</strong></caption>
@@ -14,7 +14,7 @@
               <th>更改状态</th>
           </tr>
           </thead>
-          <tbody class="scrollTbody">
+          <tbody class="scrollTbody"> 
           <tr v-for="(item,i) in yplayerList" :key="i">
               <td>{{item.name}}</td>
               <td>{{item.role}}</td>
@@ -24,24 +24,16 @@
           </tbody>
       </table>
     </div>
-    <div class="abottom">
-
-        <!-- <img src="../../../public/asset/over.png" height="200" width="200"/> -->
-        
-          <mt-button type="primary" @click="countDown" class="bottom"> <span>计时器:
-            <img src="../../../public/asset/block.png" width="20">
-            </span></mt-button>
-             {{this.time}}
-          <mt-button type="danger" @click="over" class="bottom"><span>结束游戏
-            <img src="../../../public/asset/over.png" width="20"></span>
-          </mt-button>
+    <div>
+          <mt-button type="primary" @click="countDown" class="bottom">计时器:&nbsp;{{this.time}}</mt-button>
+          <mt-button type="danger" @click="over" class="bottom">结束游戏</mt-button>
     </div>
-
+   
     <mt-actionsheet
               :actions="actions"
               v-model="sheetVisible">
     </mt-actionsheet>
-
+    
   </div>
 </template>
 
@@ -58,7 +50,7 @@ export default {
             method: this.alive
           },
             {
-            name:'被放逐',
+            name:'被放逐', 
             method: this.exile
           },
             {
@@ -83,7 +75,7 @@ export default {
     };
   },
   mounted() {
-     this.gainInfo()
+     this.gainInfo() 
   },
   methods: {
       async alive() {
@@ -98,7 +90,7 @@ export default {
             this.gainInfo()
          }
          this.sheetVisible = false
-      },
+      },  
       async exile() {
         let data = {
           'roomId': this.Room,
@@ -150,8 +142,8 @@ export default {
       },
       async gainInfo() {
             const res = await this.$axios.get(`/gainInfo?roomId=${this.Room}`)
-              const {message,status,playerList} = res.data
-              // console.log(res)
+              const {message,status,playerList} = res.data 
+              // console.log(res) 
               // this.yplayerList=[
               //         {'name':'xx',
               //         'role':'狼人',
@@ -207,9 +199,9 @@ export default {
                        })
                 }else {
                     this.$toast({
-                        message: message,
-                        position: "middle",
-                        duration: 1000,
+                        message: message, 
+                        position: "middle", 
+                        duration: 1000, 
                       })
                 }
             },
@@ -225,7 +217,7 @@ export default {
 
                    let werwolfList1=[]  // 所有的狼
                    let werwolfList2=[]  // 活者的狼
-                let wplayerList1= this.yplayerList.filter((item,i) => {
+                let wplayerList1= this.yplayerList.filter((item,i) => {      
                     return Object.keys({role:''}).every(key => {
                       if(item[key] === '狼人' ){
                         console.log(i)
@@ -236,7 +228,7 @@ export default {
                  })
                           //  console.log(werwolfList1)
                           //  console.log(fplayerList1)
-                wplayerList1.filter((item,i) => {
+                wplayerList1.filter((item,i) => {   
                       return Object.keys({state:1}).every(key => {
                         if((item[key] === "存活")||(item[key] === "当选警长")) {
                               werwolfList2.push(i)
@@ -246,7 +238,7 @@ export default {
                 })
                     let villagerList1=[]  // 所有的民
                     let villagerList2=[]  // 活者的民
-                 let vplayerList1= this.yplayerList.filter((item,i) => {
+                 let vplayerList1= this.yplayerList.filter((item,i) => {      
                     return Object.keys({role:''}).every(key => {
                       if(item[key] === '村民' ){
                         // console.log(i)
@@ -255,7 +247,7 @@ export default {
                       }
                   })
                  })
-                vplayerList1.filter((item,i) => {
+                vplayerList1.filter((item,i) => {   
                       return Object.keys({state:1}).every(key => {
                         if((item[key] === "存活")||(item[key] === "当选警长")) {
                               villagerList2.push(i)
@@ -265,11 +257,11 @@ export default {
                 })
                  let aplayerList2 = this.yplayerList.filter(item => {     // 活着的人
                       return Object.keys({state:1}).every(key => {
-                        return item[key] === "存活"||item[key] === "当选警长"
-
+                        return item[key] === "存活"||item[key] === "当选警长" 
+                      
                   })
                 })
-
+               
                 console.log(werwolfList1)
                 let heroList=[]
                 for(let i=0;i<this.yplayerList.length;i++) {
@@ -278,12 +270,12 @@ export default {
                     heroList[i]='x'
                   }else {
                     heroList[i]=i
-                  }
+                  } 
                 }
                 heroList = heroList.filter(item=>{
                   return item!=='x'
                 })
-
+                
                       // 判断谁赢了
                  if((werwolfList2.length-1)>(this.yplayerList.length-werwolfList2.length)||aplayerList2.length-villagerList2.length===0||villagerList2.length===0){
                    this.winArrays=werwolfList1
@@ -299,7 +291,7 @@ export default {
                 console.log(res)
                   //跳转到结束页面
                 this.$router.push({path:"gameOver",});
-                       })
+                       })      
                       },
    countDown() {
             let t = 90
@@ -312,36 +304,34 @@ export default {
                 // 时间剩余30s
                 if (t === 30) {
                      this.$toast({
-                        message: "还剩30s",
-                        position: "middle",
-                        duration: 1000,
+                        message: "还剩30s", 
+                        position: "middle", 
+                        duration: 1000, 
                       })
-                } else if (t < 0) {
+                } else if (t <= 0) {
                     clearInterval(this.intervalTimer);
                 }
             }, 1000)
-
+           
       },
+     
 
-
-
+           
    }
-
+   
 }
 
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1 {
-  margin: 2rem;
-}
+
 .table {
     background-color: #ccd8eb;
     text-align:left;
      width: 100%;
-     border-collapse:collapse;
-     border-spacing:0;
+     border-collapse:collapse; 
+     border-spacing:0; 
      table-layout:fixed
 }
 .fixedThead{
@@ -351,27 +341,24 @@ h1 {
 			width: 100%;
       text-align: left;
        table-layout:fixed;
-      background-color: #ebccd9;
+      background-color: #7c7c81;  
 }
 .scrollTbody {
 			display: block;
 			height: 20rem;
 			overflow: auto;
 			width: 100%;
-
-      color: #656b79;
-      background-color: #6f7b88;
 		}
 .table thead, .scrollTbody tr {
     display:table;
     width:100%;
     table-layout:fixed;
 }
-.table td,.table th{
+.table td,.table th{ 
       height: 2.5rem;
       border-bottom: 1px solid #131212;
       text-align: center;
-		}
+		} 
 
 .biankuang {
       width: 90%;
@@ -392,15 +379,6 @@ h1 {
   width: 35%;
   margin:0 1rem;
   font-size: 1rem;
-  text-align: center;
-  height: 100%;
-  
-}
-.bottom span {
-line-height: 3rem;
-}
-.abottom {
-  height: 3rem;
 }
 
 </style>
