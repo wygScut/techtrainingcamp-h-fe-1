@@ -49,7 +49,7 @@
 export default {
   data() {
     return {
-        Room:this.$route.params.roomId,
+        Room:null,
         roleId:0,
         actions:[
           {
@@ -82,10 +82,16 @@ export default {
     };
   },
   mounted() {
-     this.lunxun() 
+    const roomInfo = this.$route.params;
+    if(JSON.stringify(roomInfo)=='{}'){
+      this.Room = sessionStorage.getItem('Room');
+    }else{
+      this.Room = roomInfo.roomId;
+      sessionStorage.setItem('Room',roomInfo.roomId);
+    }
+    this.lunxun() 
   },
   methods: {
-       
       async alive() {
         let data = {
           'roomId': this.Room,
@@ -149,79 +155,53 @@ export default {
          this.sheetVisible = false
       },
       async gainInfo() {
-            const res = await this.$axios.get(`/gainInfo?roomId=${this.Room}`)
-              const {message,status,playerList} = res.data 
-              // console.log(res) 
-              // this.yplayerList=[
-              //         {'name':'xx',
-              //         'role':'狼人',
-              //         'state':1,
-              //         },
-              //         {'name':'xz',
-              //         'role':'预言家',
-              //         'state':2,
-              //         },
-              //         {'name':'xxsz',
-              //         'role':'猎人',
-              //         'state':1,
-              //         },
-              //         {'name':'xxsz',
-              //         'role':'狼人',
-              //         'state':1,
-              //         },
-              //         {'name':'xxsz',
-              //         'role':'村民',
-              //         'state':1,
-              //         },
-              //         {'name':'xxsz',
-              //         'role':'女巫',
-              //         'state':1,
-              //         },
-              //         {'name':'xxsz',
-              //         'role':'狼人',
-              //         'state':2,
-              //         }]
-                      // console.log(this.yplayerList)  //假数据
-              if(status===200) {
-                    this.yplayerList = playerList.forEach(item => {
-                           Object.keys({state:1}).every(key => {
-                              switch (item[key]) {
-                                    case 1:
-                                        item[key] = "存活";
-                                        break;
-                                    case 2:
-                                        item[key] = "被放逐";
-                                        break;
-                                    case 3:
-                                        item[key] = "晚上死亡";
-                                        break;
-                                    case 4:
-                                        item[key] = "被猎杀";
-                                        break;
-                                    case 5:
-                                        item[key] = "当选警长";
-                                        break;
-                                  }
-                             })
-                       })
-                }else {
-                    this.$toast({
-                        message: message, 
-                        position: "middle", 
-                        duration: 1000, 
-                      })
-                }
-            },
-       lunxun() {
-            window.setInterval(() => {
-              setTimeout(this.gainInfo, 0)
-            }, 3000)
-        },
+        const res = await this.$axios.get(`/gainInfo?roomId=${this.Room}`)
+        const {message,status,playerList} = res.data;
+        if(status===200) {
+          this.yplayerList.splice(0);
+          playerList.forEach(item => {
+            Object.keys({state:1}).every(key => {
+              switch (item[key]) {
+                    case 1:
+                        item[key] = "存活";
+                        break;
+                    case 2:
+                        item[key] = "被放逐";
+                        break;
+                    case 3:
+                        item[key] = "晚上死亡";
+                        break;
+                    case 4:
+                        item[key] = "被猎杀";
+                        break;
+                    case 5:
+                        item[key] = "当选警长";
+                        break;
+                  }
+            })
+            if(this.yplayerList.indexOf(item)===-1){
+              this.yplayerList.push(item);
+            }
+          })
+        }else {
+          this.$toast({
+              message: message, 
+              position: "middle", 
+              duration: 1000, 
+            })
+        }
+      },
+      lunxun() {
+          // window.setInterval(() => {
+          //   setTimeout(this.gainInfo, 0)
+          // }, 3000)
+          setInterval(this.gainInfo,1000);
+      },
       change(ev) {
-              console.log(ev)
-              this.roleId = ev
-              this.sheetVisible = true
-            },
+        console.log(ev)
+        this.roleId = ev
+        this.sheetVisible = true
+      },
       over() {
               // 判断输赢
               // 筛选
@@ -300,27 +280,27 @@ export default {
                 this.$router.push({path:"gameOver",});
                        })      
                       },
-   countDown() {
-            let t = 90
-             clearInterval(this.intervalTimer);   // 重新开始
-           //设置定时器
-            this.intervalTimer = setInterval(() => {
-                // 得到剩余时间
-                this.time=t
-                t--
-                // 时间剩余30s
-                if (t === 30) {
-                     this.$toast({
-                        message: "还剩30s", 
-                        position: "middle", 
-                        duration: 1000, 
-                      })
-                } else if (t <= 0) {
-                    clearInterval(this.intervalTimer);
-                }
-            }, 1000)
-      },
-   }
+      countDown() {
+              let t = 90
+                clearInterval(this.intervalTimer);   // 重新开始
+              //设置定时器
+              this.intervalTimer = setInterval(() => {
+                  // 得到剩余时间
+                  this.time=t
+                  t--
+                  // 时间剩余30s
+                  if (t === 30) {
+                        this.$toast({
+                          message: "还剩30s", 
+                          position: "middle", 
+                          duration: 1000, 
+                        })
+                  } else if (t <= 0) {
+                      clearInterval(this.intervalTimer);
+                  }
+              }, 1000)
+        },
+      }
 }
 </script>
 
