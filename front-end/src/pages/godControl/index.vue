@@ -31,7 +31,7 @@
           <mt-button type="primary" @click="countDown" class="bottom"> <span>计时器:
             <img src="../../../public/asset/block.png" width="20">
             </span></mt-button>
-             {{this.time}}
+             <span>{{this.time}}</span>
           <mt-button type="danger" @click="over" class="bottom"><span>结束游戏
             <img src="../../../public/asset/over.png" width="20"></span>
           </mt-button>
@@ -391,5 +391,6 @@ line-height: 3rem;
 }
 .abottom {
   height: 3rem;
+  color: #ffffff;
 }
 </style>
