@@ -1,11 +1,13 @@
 <template>
-  <div class="hello">
-    上帝添加角色页
+  <div class="hello" visible.sync='1'>
+    <p>上帝添加角色页</p>
+
   </div>
 </template>
 
 <script>
 // 任俊燊
+
 export default {
   name: 'AddRoles',
   props: {

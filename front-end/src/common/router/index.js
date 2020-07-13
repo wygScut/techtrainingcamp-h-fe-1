@@ -33,6 +33,7 @@ const routes = [
     {
         //上帝房间状态控制
         path: '/godControl',
+        name:'godControl',
         component: GodControl,
     },
     {
