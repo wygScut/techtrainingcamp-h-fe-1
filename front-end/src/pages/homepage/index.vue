@@ -44,7 +44,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 header{
-  font-size: 3.2rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: white;
   margin: 11vh;

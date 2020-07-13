@@ -23,7 +23,7 @@ export default {
         this.transitionName = 'transitionRight';
       }
     }
-  }
+  },
 }
 </script>
 

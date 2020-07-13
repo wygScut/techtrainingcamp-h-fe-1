@@ -63,8 +63,8 @@ export default {
     refreshState(){
       Indicator.open();
       let getState = {
-        roomId:parseInt(localStorage.getItem("roomId")),
-        playerId: parseInt(localStorage.getItem("playerId"))
+        roomId:parseInt(sessionStorage.getItem("roomId")),
+        playerId: parseInt(sessionStorage.getItem("playerId"))
       };
       console.log("getstate:");
       console.log(getState)
@@ -97,16 +97,16 @@ export default {
     let name,role,playerId,roomId;
     const playerinfo = this.$route.params;
     if(JSON.stringify(playerinfo) == "{}"){
-      roomId = localStorage.getItem("roomId");
-      name= localStorage.getItem("name");
-      playerId = localStorage.getItem("playerId");
-      role = localStorage.getItem("role");
+      roomId = sessionStorage.getItem("roomId");
+      name= sessionStorage.getItem("name");
+      playerId = sessionStorage.getItem("playerId");
+      role = sessionStorage.getItem("role");
     }else{
       [{name,playerId,role,roomId}] = [playerinfo];
-      localStorage.setItem('name',name);
-      localStorage.setItem('playerId',playerId);
-      localStorage.setItem('role',role);
-      localStorage.setItem('roomId',roomId);
+      sessionStorage.setItem('name',name);
+      sessionStorage.setItem('playerId',playerId);
+      sessionStorage.setItem('role',role);
+      sessionStorage.setItem('roomId',roomId);
     }
     Object.assign(this.info,{name,roomId,role,playerId});
   }
