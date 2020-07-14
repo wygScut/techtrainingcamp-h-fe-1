@@ -27,6 +27,9 @@
     <h3>第三方阵营:</h3>
     <p>警长：附加身份牌，游戏开始后第一天从所有玩家中通过投票选举出一名玩家为警长，警长在白天最后发言并且投票时有1.5 票。</p>
     </div>
+        <div class='btn'>
+		<mt-button type='primary' @click="back">返回</mt-button>
+    </div>
   </div>
   
 </template>
@@ -34,15 +37,24 @@
 <script>
 // 宋秋雁
 export default {
-  name: 'Rules',
-  props: {
-    msg: String
-  }
+    mounted() {
+	
+  },
+  methods: {
+		back() {
+				this.$router.go(-1);
+        },
+      }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.hello {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
 h1 {
   margin: 10px;
 }
@@ -63,5 +75,11 @@ p {
 .dl {
   border-radius: 25px;
   border: 2px solid;
+}
+.btn {
+position:absolute; 
+top:20px;
+right: 20px;
+float: inherit;
 }
 </style>

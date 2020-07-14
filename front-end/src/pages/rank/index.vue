@@ -1,18 +1,9 @@
 <template>
-<div>
+<div class="rank">
 	<h1>排行榜</h1>
 	<div class="ranking">
 			<ul>
 				<li v-for="(item,i) in scoreList" :key="i"><a>{{item.name}}:{{item.score}}</a></li>
-				<!-- <li><a>玩家名称</a></li>
-				<li><a>玩家名称</a></li>
-				<li><a>玩家名称</a></li>
-				<li><a>玩家名称</a></li>
-				<li><a>玩家名称</a></li>
-				<li><a>玩家名称</a></li>
-				<li><a>玩家名称</a></li>
-				<li><a>玩家名称</a></li>
-				<li><a>玩家名称</a></li> -->
 			</ul>
 		</div>
     <div class='btn'>
@@ -28,26 +19,7 @@ export default {
     return {
       Room:this.$route.params.roomId,
       scoreList:[
-            {
-          name:'safds',
-          score:2
-          },
-          {
-          name:'adf',
-          score:3
-          },
-          {
-          name:'adffda',
-          score:5
-          },
-          {
-          name:'fadfaf',
-          score:1
-          },
-          {
-          name:'xiaoming',
-          score:2
-          }
+       
       ]
       
     }
@@ -77,6 +49,11 @@ methods: {
 
 <style scoped>
 
+		.rank {
+			height: 100%;
+			width: 100%;
+			position: relative;
+		}
 		a {
 			color: #525C66;
 			text-decoration: none;
@@ -137,10 +114,11 @@ methods: {
 			background: #0164b4
 		}
 
-         .btn {
-            position:absolute; 
-            bottom:20px;
-            right: 20px;
-        }
+		.btn {
+			position:absolute; 
+			top:20px;
+			right: 20px;
+			float: inherit;
+			}
 	</style>
 
