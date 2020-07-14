@@ -4,15 +4,6 @@
 	<div class="ranking">
 			<ul>
 				<li v-for="(item,i) in scoreList" :key="i"><a>{{item.name}}:{{item.score}}</a></li>
-				<!-- <li><a>玩家名称</a></li>
-				<li><a>玩家名称</a></li>
-				<li><a>玩家名称</a></li>
-				<li><a>玩家名称</a></li>
-				<li><a>玩家名称</a></li>
-				<li><a>玩家名称</a></li>
-				<li><a>玩家名称</a></li>
-				<li><a>玩家名称</a></li>
-				<li><a>玩家名称</a></li> -->
 			</ul>
 		</div>
     <div class='btn'>
@@ -26,28 +17,8 @@
 export default {
   data () {
     return {
-      Room:this.$route.params.roomId,
+      Room:sessionStorage.getItem('roomId')||sessionStorage.getItem('Room'),
       scoreList:[
-            {
-          name:'safds',
-          score:2
-          },
-          {
-          name:'adf',
-          score:3
-          },
-          {
-          name:'adffda',
-          score:5
-          },
-          {
-          name:'fadfaf',
-          score:1
-          },
-          {
-          name:'xiaoming',
-          score:2
-          }
       ]
       
     }
