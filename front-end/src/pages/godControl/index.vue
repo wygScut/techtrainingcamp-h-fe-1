@@ -1,5 +1,6 @@
 <template>
   <div>
+      <div class="back-button" @click="backHome"><img src="../../static/icons/button/back.png"/></div>
     <h1>狼人杀</h1>
     <strong>房间号:{{Room}}</strong>
       
@@ -29,11 +30,11 @@
         <!-- <img src="../../../public/asset/over.png" height="200" width="200"/> -->
         
           <mt-button type="primary" @click="countDown" class="bottom"> <span>计时器:
-            <img src="../../../public/asset/block.png" width="20">
+            <img src="../../static/icons/button/block.png" width="20">
             </span></mt-button>
              <span>{{this.time}}</span>
           <mt-button type="danger" @click="over" class="bottom"><span>结束游戏
-            <img src="../../../public/asset/over.png" width="20"></span>
+            <img src="../../static/icons/button/over.png" width="20"></span>
           </mt-button>
     </div>
     <mt-actionsheet
@@ -208,7 +209,7 @@ export default {
                 this.$messagebox.confirm('确定执行此操作?').then(async () => {
                    let werwolfList1=[]  // 所有的狼
                    let werwolfList2=[]  // 活者的狼
-                let wplayerList1= this.yplayerList.filter((item,i) => {      
+                let wplayerList1= this.yplayerList.filter((item,i) => {      // 拿所有狼人对象
                     return Object.keys({role:''}).every(key => {
                       if(item[key] === '狼人' ){
                         console.log(i)
@@ -217,9 +218,7 @@ export default {
                       }
                   })
                  })
-                          //  console.log(werwolfList1)
-                          //  console.log(fplayerList1)
-                wplayerList1.filter((item,i) => {   
+                wplayerList1.filter((item,i) => {     // 拿所有活着的狼人对象
                       return Object.keys({state:1}).every(key => {
                         if((item[key] === "存活")||(item[key] === "当选警长")) {
                               werwolfList2.push(i)
@@ -229,16 +228,15 @@ export default {
                 })
                     let villagerList1=[]  // 所有的民
                     let villagerList2=[]  // 活者的民
-                 let vplayerList1= this.yplayerList.filter((item,i) => {      
+                 let vplayerList1= this.yplayerList.filter((item,i) => {        //拿所有村民对象
                     return Object.keys({role:''}).every(key => {
                       if(item[key] === '村民' ){
-                        // console.log(i)
                         villagerList1.push(i)
                         return true
                       }
                   })
                  })
-                vplayerList1.filter((item,i) => {   
+                vplayerList1.filter((item,i) => {       // 拿所有活着的村民对象
                       return Object.keys({state:1}).every(key => {
                         if((item[key] === "存活")||(item[key] === "当选警长")) {
                               villagerList2.push(i)
@@ -246,13 +244,12 @@ export default {
                       }
                   })
                 })
-                 let aplayerList2 = this.yplayerList.filter(item => {     // 活着的人
+                 let aplayerList2 = this.yplayerList.filter(item => {     // 活着的所有人
                       return Object.keys({state:1}).every(key => {
                         return item[key] === "存活"||item[key] === "当选警长"
                   })
                 })
-                console.log(werwolfList1)
-                let heroList=[]
+                let heroList=[]     // 好人阵营
                 for(let i=0;i<this.yplayerList.length;i++) {
                   if(werwolfList1.includes(i)){
                     console.log(i)
@@ -270,10 +267,8 @@ export default {
                 }else {
                   this.winArrays=heroList
                 }
-                  console.log(this.winArrays)
                   // 提交胜利名单var
                 var data = {"roomId":this.Room,"winners":this.winArrays}
-                console.log(data)
                 const res = await this.$axios.post('/endGame',data)
                 console.log(res)
                   //跳转到结束页面
@@ -300,6 +295,9 @@ export default {
                   }
               }, 1000)
         },
+      backHome(){
+        this.$router.go(-1);
+        },
       }
 }
 </script>
@@ -307,55 +305,56 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1 {
-   padding: 2rem 0;
+  padding: 2rem 0;
 }
 .table {
-    background-color: #ccd8eb;
-    text-align:left;
-     width: 100%;
-     border-collapse:collapse; 
-     border-spacing:0; 
-     table-layout:fixed
+    /* background-color: #ccd8eb; */
+  text-align:left;
+  width: 100%;
+  border-collapse:collapse; 
+  border-spacing:0; 
+  table-layout:fixed;
 }
 .fixedThead{
     /* overflow: auto; */
-    width: calc( 100% - 1em );
-			display: table;
-			width: 100%;
-      text-align: left;
-       table-layout:fixed;
-      background-color: #5a6366;  
+  width: calc( 100% - 1em );
+	display: table;
+	width: 100%;
+  text-align: left;
+  table-layout:fixed;
+  background-color: #106480;  
 }
 .scrollTbody {
-			display: block;
-			height: 20rem;
-			overflow: auto;
-			width: 100%;
-      color: #656b79;
-      background-color: #6f7b88;
+	display: block;
+	height: 20rem;
+	overflow: auto;
+	width: 100%;
+  color: #000000;
+  background-color: #6f7b88;
+  opacity:0.8;
 		}
 .table thead, .scrollTbody tr {
-    display:table;
-    width:100%;
-    table-layout:fixed;
+  display:table;
+  width:100%;
+  table-layout:fixed;
 }
 .table td,.table th{ 
-      height: 2.5rem;
-      border-bottom: 1px solid #131212;
-      text-align: center;
+  height: 2.5rem;
+  border-bottom: 1px solid #131212;
+  text-align: center;
 		}
 .biankuang {
-      width: 90%;
-      margin: 1rem auto;
+  width: 90%;
+  margin: 1rem auto;
 }
 .btn {
-  background-color: #ccd8eb;
+  /* background-color: #ccd8eb; */
   font-size:1rem;
   border:0px;
   border-radius: 0px;
 }
 .btn:active {
-  background-color:  #188a84;
+  background-color:  #8a183a;
   color: #cccccc;
 }
 .bottom {
@@ -364,14 +363,20 @@ h1 {
   font-size: 1rem;
   text-align: center;
   height: 100%;
-  
 }
 .bottom span {
-line-height: 3rem;
-color: #d4d1d1;
+  line-height: 3rem;
+  color: #d4d1d1;
 }
 .abottom {
   height: 3rem;
   color: #b6b0b0;
+}
+.back-button img {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 8vw;
+  height: 4vh;
 }
 </style>
