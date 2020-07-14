@@ -50,7 +50,7 @@ export default {
   -webkit-background-size: cover;
   -o-background-size: cover;
   background-position: center 0;
-  background-image: url(../public/asset/backimg.jpg);
+  background-image: url(static/icons/home-bg.jpg);
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

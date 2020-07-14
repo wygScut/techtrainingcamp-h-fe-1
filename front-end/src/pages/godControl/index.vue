@@ -30,11 +30,11 @@
         <!-- <img src="../../../public/asset/over.png" height="200" width="200"/> -->
         
           <mt-button type="primary" @click="countDown" class="bottom"> <span>计时器:
-            <img src="../../../public/asset/block.png" width="20">
+            <img src="../../static/icons/button/block.png" width="20">
             </span></mt-button>
              <span>{{this.time}}</span>
           <mt-button type="danger" @click="over" class="bottom"><span>结束游戏
-            <img src="../../../public/asset/over.png" width="20"></span>
+            <img src="../../static/icons/button/over.png" width="20"></span>
           </mt-button>
     </div>
     <mt-actionsheet
