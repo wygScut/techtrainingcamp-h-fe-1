@@ -17,9 +17,8 @@
 export default {
   data () {
     return {
-      Room:this.$route.params.roomId,
+      Room:sessionStorage.getItem('roomId')||sessionStorage.getItem('Room'),
       scoreList:[
-       
       ]
       
     }
