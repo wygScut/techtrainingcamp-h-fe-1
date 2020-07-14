@@ -1,5 +1,6 @@
 <template>
     <div class="hello">
+       <div class="back-button" @click="backHome"><img src="../../static/icons/button/back.png"/></div>
         <h1>房间设置</h1>
         <p @click="showBattle">选择推荐阵容</p>
         <div class='selectedRole aBorder'>
@@ -101,8 +102,11 @@ export default {
    },
    showBattle() {
      this.popupVisible = true 
-   }
-  },
+   },
+   backHome(){
+     this.$router.go(-1);
+     },
+  }
 };
 </script>
 
@@ -119,6 +123,7 @@ p {
 h1 {
   margin: 2rem;
 }
+
 .hello>p {
   color: #ffffff;
 }
@@ -152,5 +157,12 @@ h1 {
   color: #000000;
   height: 3rem;
   line-height: 3rem;
+}
+.back-button img {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 8vw;
+  height: 4vh;
 }
 </style>
