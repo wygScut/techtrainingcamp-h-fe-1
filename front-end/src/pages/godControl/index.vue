@@ -272,7 +272,7 @@ export default {
                 const res = await this.$axios.post('/endGame',data)
                 console.log(res)
                   //跳转到结束页面
-                this.$router.push({path:"gameOver",});
+                this.$router.push({path:"gameOver",query:{roomId:this.Room}});
                        })      
                       },
       countDown() {
